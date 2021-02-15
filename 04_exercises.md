@@ -510,7 +510,7 @@ ggmap(twins)+
            size = 4)+
   annotate(geom = "text",
            x = -93.17216,
-           y = 44.94085,
+           y = 44.88,
            xmin = -93.17216,
            xmax = -93.16924,
            ymin = 44.93976,
@@ -562,8 +562,42 @@ starbucks_with_2018_pop_est <-
 ```
 
   6. **`dplyr` review**: Look through the code above and describe what each line of code does.
+  
+
+```r
+#Names a data set
+#Read the data from a link
+#separate de observations into the dot and the name of county as variables
+#Take de dot variable away
+#change the format of the observation names so that they are lower case
+#name the new data frame
+#Join the Starbucks by state data set with the census population data, by matching the Starbucks observations by state name with the population data
+#Create a new variable that contains the number of Starbucks per 
+#10 000 people in each state. 
+```
 
   7. Create a choropleth map that shows the number of Starbucks per 10,000 people on a map of the US. Use a new fill color, add points for all Starbucks in the US (except Hawaii and Alaska), add an informative title for the plot, and include a caption that says who created the plot (you!). Make a conclusion about what you observe.
+  
+
+```r
+states_map <- map_data("state")
+starbucks_with_2018_pop_est %>% 
+  ggplot() +
+  geom_map(map = states_map,
+           aes(map_id = state_name,
+               fill = starbucks_per_10000)) +
+  expand_limits(x = states_map$long, y = states_map$lat) + 
+  theme_map()+
+  labs(title = "Starbucks per 10000 people",
+       fill = "",
+       caption = "Franco Salinas")+
+  theme(legend.background = element_blank())
+```
+
+![](04_exercises_files/figure-html/unnamed-chunk-7-1.png)<!-- -->
+  
+>I observe that the west has a higher ratio than the east. 
+
 
 ### A few of your favorite things (`leaflet`)
 
