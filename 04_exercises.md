@@ -222,13 +222,316 @@ These exercises will reiterate what you learned in the "Mapping data with R" tut
 
   1. Add the `Starbucks` locations to a world map. Add an aesthetic to the world map that sets the color of the points according to the ownership type. What, if anything, can you deduce from this visualization?  
 
+
+```r
+world <- get_stamenmap(
+  bbox = c(left = -180, bottom = -57, right = 179, top = 82.1),
+  maptype = "terrain",
+  zoom = 2
+)
+```
+
+```
+## Source : http://tile.stamen.com/terrain/2/0/0.png
+```
+
+```
+## Source : http://tile.stamen.com/terrain/2/1/0.png
+```
+
+```
+## Source : http://tile.stamen.com/terrain/2/2/0.png
+```
+
+```
+## Source : http://tile.stamen.com/terrain/2/3/0.png
+```
+
+```
+## Source : http://tile.stamen.com/terrain/2/0/1.png
+```
+
+```
+## Source : http://tile.stamen.com/terrain/2/1/1.png
+```
+
+```
+## Source : http://tile.stamen.com/terrain/2/2/1.png
+```
+
+```
+## Source : http://tile.stamen.com/terrain/2/3/1.png
+```
+
+```
+## Source : http://tile.stamen.com/terrain/2/0/2.png
+```
+
+```
+## Source : http://tile.stamen.com/terrain/2/1/2.png
+```
+
+```
+## Source : http://tile.stamen.com/terrain/2/2/2.png
+```
+
+```
+## Source : http://tile.stamen.com/terrain/2/3/2.png
+```
+
+```r
+ggmap(world)+
+  geom_point(data = Starbucks,
+             aes(x = Longitude,
+                 y = Latitude, 
+                 color = `Ownership Type`),
+             alpha = .3,
+             size = .1)+
+  theme_map()+
+  theme(legend.background = element_blank())
+```
+
+```
+## Warning: Removed 1 rows containing missing values (geom_point).
+```
+
+![](04_exercises_files/figure-html/unnamed-chunk-1-1.png)<!-- -->
+
+>I can deduce that most Starbucks are company owned or Licensed. I also can deduce that joint venture Starbucks are located only in Europe and Asia. 
+
+
   2. Construct a new map of Starbucks locations in the Twin Cities metro area (approximately the 5 county metro area).  
 
+```r
+twins <- get_stamenmap(
+  bbox = c(left = -93.80, bottom = 44.6, right = -92.3, top = 45.2),
+  maptype = "terrain",
+  zoom = 10
+)
+```
+
+```
+## Source : http://tile.stamen.com/terrain/10/245/367.png
+```
+
+```
+## Source : http://tile.stamen.com/terrain/10/246/367.png
+```
+
+```
+## Source : http://tile.stamen.com/terrain/10/247/367.png
+```
+
+```
+## Source : http://tile.stamen.com/terrain/10/248/367.png
+```
+
+```
+## Source : http://tile.stamen.com/terrain/10/249/367.png
+```
+
+```
+## Source : http://tile.stamen.com/terrain/10/245/368.png
+```
+
+```
+## Source : http://tile.stamen.com/terrain/10/246/368.png
+```
+
+```
+## Source : http://tile.stamen.com/terrain/10/247/368.png
+```
+
+```
+## Source : http://tile.stamen.com/terrain/10/248/368.png
+```
+
+```
+## Source : http://tile.stamen.com/terrain/10/249/368.png
+```
+
+```
+## Source : http://tile.stamen.com/terrain/10/245/369.png
+```
+
+```
+## Source : http://tile.stamen.com/terrain/10/246/369.png
+```
+
+```
+## Source : http://tile.stamen.com/terrain/10/247/369.png
+```
+
+```
+## Source : http://tile.stamen.com/terrain/10/248/369.png
+```
+
+```
+## Source : http://tile.stamen.com/terrain/10/249/369.png
+```
+
+```r
+ggmap(twins)+
+  geom_point(data = Starbucks,
+             aes(x = Longitude,
+                 y = Latitude, 
+                 color = `Ownership Type`),
+             alpha = .8,
+             size = .6)+
+  theme_map()+
+  theme(legend.background = element_blank())
+```
+
+```
+## Warning: Removed 25455 rows containing missing values (geom_point).
+```
+
+![](04_exercises_files/figure-html/unnamed-chunk-2-1.png)<!-- -->
+
   3. In the Twin Cities plot, play with the zoom number. What does it do?  (just describe what it does - don't actually include more than one map).  
+  
+>It changes the quality of the map's graphics.
 
   4. Try a couple different map types (see `get_stamenmap()` in help and look at `maptype`). Include a map with one of the other map types.  
 
+
+```r
+twins <- get_stamenmap(
+  bbox = c(left = -93.80, bottom = 44.6, right = -92.3, top = 45.2),
+  maptype = "toner-background",
+  zoom = 10
+)
+```
+
+```
+## Source : http://tile.stamen.com/toner-background/10/245/367.png
+```
+
+```
+## Source : http://tile.stamen.com/toner-background/10/246/367.png
+```
+
+```
+## Source : http://tile.stamen.com/toner-background/10/247/367.png
+```
+
+```
+## Source : http://tile.stamen.com/toner-background/10/248/367.png
+```
+
+```
+## Source : http://tile.stamen.com/toner-background/10/249/367.png
+```
+
+```
+## Source : http://tile.stamen.com/toner-background/10/245/368.png
+```
+
+```
+## Source : http://tile.stamen.com/toner-background/10/246/368.png
+```
+
+```
+## Source : http://tile.stamen.com/toner-background/10/247/368.png
+```
+
+```
+## Source : http://tile.stamen.com/toner-background/10/248/368.png
+```
+
+```
+## Source : http://tile.stamen.com/toner-background/10/249/368.png
+```
+
+```
+## Source : http://tile.stamen.com/toner-background/10/245/369.png
+```
+
+```
+## Source : http://tile.stamen.com/toner-background/10/246/369.png
+```
+
+```
+## Source : http://tile.stamen.com/toner-background/10/247/369.png
+```
+
+```
+## Source : http://tile.stamen.com/toner-background/10/248/369.png
+```
+
+```
+## Source : http://tile.stamen.com/toner-background/10/249/369.png
+```
+
+```r
+ggmap(twins)+
+  geom_point(data = Starbucks,
+             aes(x = Longitude,
+                 y = Latitude, 
+                 color = `Ownership Type`),
+             alpha = .8,
+             size = .6)+
+  theme_map()+
+  theme(legend.background = element_blank())
+```
+
+```
+## Warning: Removed 25455 rows containing missing values (geom_point).
+```
+
+![](04_exercises_files/figure-html/unnamed-chunk-3-1.png)<!-- -->
+
   5. Add a point to the map that indicates Macalester College and label it appropriately. There are many ways you can do think, but I think it's easiest with the `annotate()` function (see `ggplot2` cheatsheet).
+
+
+```r
+twins <- get_stamenmap(
+  bbox = c(left = -93.80, bottom = 44.6, right = -92.3, top = 45.2),
+  maptype = "toner-background",
+  zoom = 10
+)
+ggmap(twins)+
+  geom_point(data = Starbucks,
+             aes(x = Longitude,
+                 y = Latitude, 
+                 color = `Ownership Type`),
+             alpha = .8,
+             size = .6)+
+  theme_map()+
+  theme(legend.background = element_blank())+
+  annotate(geom = "point", 
+           x = -93.17216,
+           y = 44.94085,
+           xmin = -93.17216, 
+           xend = -93.16924, 
+           ymin = 44.93976, 
+           yend = 44.94085, 
+           color = "blue",
+           size = 4)+
+  annotate(geom = "text",
+           x = -93.17216,
+           y = 44.94085,
+           xmin = -93.17216,
+           xmax = -93.16924,
+           ymin = 44.93976,
+           ymax = 44.94085,
+           label = "Macalester College",
+           color = "Blue")
+```
+
+```
+## Warning: Ignoring unknown aesthetics: xmin, xend, ymin, yend
+```
+
+```
+## Warning: Ignoring unknown aesthetics: xmin, xmax, ymin, ymax
+```
+
+```
+## Warning: Removed 25455 rows containing missing values (geom_point).
+```
+
+![](04_exercises_files/figure-html/unnamed-chunk-4-1.png)<!-- -->
 
 ### Choropleth maps with Starbucks data (`geom_map()`)
 

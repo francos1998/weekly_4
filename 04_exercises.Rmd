@@ -96,13 +96,104 @@ These exercises will reiterate what you learned in the "Mapping data with R" tut
 
   1. Add the `Starbucks` locations to a world map. Add an aesthetic to the world map that sets the color of the points according to the ownership type. What, if anything, can you deduce from this visualization?  
 
+```{r}
+world <- get_stamenmap(
+  bbox = c(left = -180, bottom = -57, right = 179, top = 82.1),
+  maptype = "terrain",
+  zoom = 2
+)
+ggmap(world)+
+  geom_point(data = Starbucks,
+             aes(x = Longitude,
+                 y = Latitude, 
+                 color = `Ownership Type`),
+             alpha = .3,
+             size = .1)+
+  theme_map()+
+  theme(legend.background = element_blank())
+  
+```
+
+>I can deduce that most Starbucks are company owned or Licensed. I also can deduce that joint venture Starbucks are located only in Europe and Asia. 
+
+
   2. Construct a new map of Starbucks locations in the Twin Cities metro area (approximately the 5 county metro area).  
+```{r}
+twins <- get_stamenmap(
+  bbox = c(left = -93.80, bottom = 44.6, right = -92.3, top = 45.2),
+  maptype = "terrain",
+  zoom = 10
+)
+ggmap(twins)+
+  geom_point(data = Starbucks,
+             aes(x = Longitude,
+                 y = Latitude, 
+                 color = `Ownership Type`),
+             alpha = .8,
+             size = .6)+
+  theme_map()+
+  theme(legend.background = element_blank())
+```
 
   3. In the Twin Cities plot, play with the zoom number. What does it do?  (just describe what it does - don't actually include more than one map).  
+  
+>It changes the quality of the map's graphics.
 
   4. Try a couple different map types (see `get_stamenmap()` in help and look at `maptype`). Include a map with one of the other map types.  
 
+```{r}
+twins <- get_stamenmap(
+  bbox = c(left = -93.80, bottom = 44.6, right = -92.3, top = 45.2),
+  maptype = "toner-background",
+  zoom = 10
+)
+ggmap(twins)+
+  geom_point(data = Starbucks,
+             aes(x = Longitude,
+                 y = Latitude, 
+                 color = `Ownership Type`),
+             alpha = .8,
+             size = .6)+
+  theme_map()+
+  theme(legend.background = element_blank())
+```
+
   5. Add a point to the map that indicates Macalester College and label it appropriately. There are many ways you can do think, but I think it's easiest with the `annotate()` function (see `ggplot2` cheatsheet).
+
+```{r}
+twins <- get_stamenmap(
+  bbox = c(left = -93.80, bottom = 44.6, right = -92.3, top = 45.2),
+  maptype = "toner-background",
+  zoom = 10
+)
+ggmap(twins)+
+  geom_point(data = Starbucks,
+             aes(x = Longitude,
+                 y = Latitude, 
+                 color = `Ownership Type`),
+             alpha = .8,
+             size = .6)+
+  theme_map()+
+  theme(legend.background = element_blank())+
+  annotate(geom = "point", 
+           x = -93.17216,
+           y = 44.94085,
+           xmin = -93.17216, 
+           xend = -93.16924, 
+           ymin = 44.93976, 
+           yend = 44.94085, 
+           color = "blue",
+           size = 4)+
+  annotate(geom = "text",
+           x = -93.17216,
+           y = 44.94085,
+           xmin = -93.17216,
+           xmax = -93.16924,
+           ymin = 44.93976,
+           ymax = 44.94085,
+           label = "Macalester College",
+           color = "Blue")
+```
 
 ### Choropleth maps with Starbucks data (`geom_map()`)
 
