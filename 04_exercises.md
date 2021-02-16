@@ -679,8 +679,8 @@ leaflet(data = favorite_stp_by_franco) %>% #base plot
 ## Assuming "long" and "lat" are longitude and latitude, respectively
 ```
 
-<!--html_preserve--><div id="htmlwidget-67426b81d2b566152c6a" style="width:672px;height:480px;" class="leaflet html-widget"></div>
-<script type="application/json" data-for="htmlwidget-67426b81d2b566152c6a">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addProviderTiles","args":["CartoDB.Voyager",null,null,{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addCircles","args":[[44.94131,44.9378965,44.93988,44.95669,44.94922,44.94331,44.93368,44.94208,44.94048,44.9569],[-93.16661,-93.1712321,-93.27594,-93.27703,-93.28694,-93.16484,-93.1682,-93.19679,-93.16917,-93.27661],10,null,null,{"interactive":true,"className":"","stroke":true,"color":["#00FF00","#00FF00","#0000FF","#0000FF","#00FF00","#00FF00","#0000FF","#00FF00","#00FF00","#00FF00"],"weight":5,"opacity":1,"fill":true,"fillColor":["#00FF00","#00FF00","#0000FF","#0000FF","#00FF00","#00FF00","#0000FF","#00FF00","#00FF00","#00FF00"],"fillOpacity":0.2},null,null,["Home","Macalester College","Hola Arepa","Vertical Endeavors","Moto-i","My friend's place","Simplicitea","River","Shish","IceHouse"],{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null,null]},{"method":"addLegend","args":[{"colors":["#00FF00","#0000FF"],"labels":["no","yes"],"na_color":null,"na_label":"NA","opacity":1,"position":"topright","type":"factor","title":"top3","extra":null,"layerId":null,"className":"info legend","group":null}]},{"method":"addPolylines","args":[[[[{"lng":[-93.16661,-93.1712321,-93.27594,-93.27703,-93.28694,-93.16484,-93.1682,-93.19679,-93.16917,-93.27661],"lat":[44.94131,44.9378965,44.93988,44.95669,44.94922,44.94331,44.93368,44.94208,44.94048,44.9569]}]]],null,null,{"interactive":true,"className":"","stroke":true,"color":"#8B0000","weight":5,"opacity":0.5,"fill":false,"fillColor":"#8B0000","fillOpacity":0.2,"smoothFactor":1,"noClip":false},null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[44.93368,44.9569],"lng":[-93.28694,-93.16484]}},"evals":[],"jsHooks":[]}</script><!--/html_preserve-->
+<!--html_preserve--><div id="htmlwidget-0396a4779e4df5ccd729" style="width:672px;height:480px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-0396a4779e4df5ccd729">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addProviderTiles","args":["CartoDB.Voyager",null,null,{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addCircles","args":[[44.94131,44.9378965,44.93988,44.95669,44.94922,44.94331,44.93368,44.94208,44.94048,44.9569],[-93.16661,-93.1712321,-93.27594,-93.27703,-93.28694,-93.16484,-93.1682,-93.19679,-93.16917,-93.27661],10,null,null,{"interactive":true,"className":"","stroke":true,"color":["#00FF00","#00FF00","#0000FF","#0000FF","#00FF00","#00FF00","#0000FF","#00FF00","#00FF00","#00FF00"],"weight":5,"opacity":1,"fill":true,"fillColor":["#00FF00","#00FF00","#0000FF","#0000FF","#00FF00","#00FF00","#0000FF","#00FF00","#00FF00","#00FF00"],"fillOpacity":0.2},null,null,["Home","Macalester College","Hola Arepa","Vertical Endeavors","Moto-i","My friend's place","Simplicitea","River","Shish","IceHouse"],{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null,null]},{"method":"addLegend","args":[{"colors":["#00FF00","#0000FF"],"labels":["no","yes"],"na_color":null,"na_label":"NA","opacity":1,"position":"topright","type":"factor","title":"top3","extra":null,"layerId":null,"className":"info legend","group":null}]},{"method":"addPolylines","args":[[[[{"lng":[-93.16661,-93.1712321,-93.27594,-93.27703,-93.28694,-93.16484,-93.1682,-93.19679,-93.16917,-93.27661],"lat":[44.94131,44.9378965,44.93988,44.95669,44.94922,44.94331,44.93368,44.94208,44.94048,44.9569]}]]],null,null,{"interactive":true,"className":"","stroke":true,"color":"#8B0000","weight":5,"opacity":0.5,"fill":false,"fillColor":"#8B0000","fillOpacity":0.2,"smoothFactor":1,"noClip":false},null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[44.93368,44.9569],"lng":[-93.28694,-93.16484]}},"evals":[],"jsHooks":[]}</script><!--/html_preserve-->
 
   
 ## Revisiting old datasets
@@ -852,7 +852,48 @@ ggmap(US)+
   10. Only 14.4% of the trips in our data are carried out by casual users. Create a plot that shows which area(s) have stations with a much higher percentage of departures by casual users. What patterns do you notice? Also plot this on top of a map. I think it will be more clear what the patterns are.
   
 
+```r
+departures_casual <- 
+  Trips %>% 
+  left_join(Stations, by = c("sstation" = "name")) %>% 
+  mutate(casual = ifelse(client == "Casual",1,0)) %>% 
+  group_by(lat, long) %>% 
+  summarize(prop_casual = mean(casual)) 
+```
+
+```
+## `summarise()` regrouping output by 'lat' (override with `.groups` argument)
+```
+
+```r
+US <- get_stamenmap(
+  bbox = c(left = -77.2201, bottom = 38.8006, right = -76.8459, top = 38.9692),
+  maptype = "terrain",
+  zoom = 12
+)
+
   
+ggmap(US)+
+  geom_point(data = departures_casual,
+             aes(x = long,
+                 y = lat,
+                 color = prop_casual),
+             alpha = .8,
+             size = 2)+
+  theme_map()+
+  theme(legend.background = element_blank())+
+  labs(color = "Casual users' 
+       proportion")
+```
+
+```
+## Warning: Removed 46 rows containing missing values (geom_point).
+```
+
+![](04_exercises_files/figure-html/unnamed-chunk-12-1.png)<!-- -->
+  
+>I notice that the points clustered in the central area have a higher proportion of casual users. 
+
 ### COVID-19 data
 
 The following exercises will use the COVID-19 data from the NYT.
