@@ -679,8 +679,8 @@ leaflet(data = favorite_stp_by_franco) %>% #base plot
 ## Assuming "long" and "lat" are longitude and latitude, respectively
 ```
 
-<!--html_preserve--><div id="htmlwidget-0396a4779e4df5ccd729" style="width:672px;height:480px;" class="leaflet html-widget"></div>
-<script type="application/json" data-for="htmlwidget-0396a4779e4df5ccd729">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addProviderTiles","args":["CartoDB.Voyager",null,null,{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addCircles","args":[[44.94131,44.9378965,44.93988,44.95669,44.94922,44.94331,44.93368,44.94208,44.94048,44.9569],[-93.16661,-93.1712321,-93.27594,-93.27703,-93.28694,-93.16484,-93.1682,-93.19679,-93.16917,-93.27661],10,null,null,{"interactive":true,"className":"","stroke":true,"color":["#00FF00","#00FF00","#0000FF","#0000FF","#00FF00","#00FF00","#0000FF","#00FF00","#00FF00","#00FF00"],"weight":5,"opacity":1,"fill":true,"fillColor":["#00FF00","#00FF00","#0000FF","#0000FF","#00FF00","#00FF00","#0000FF","#00FF00","#00FF00","#00FF00"],"fillOpacity":0.2},null,null,["Home","Macalester College","Hola Arepa","Vertical Endeavors","Moto-i","My friend's place","Simplicitea","River","Shish","IceHouse"],{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null,null]},{"method":"addLegend","args":[{"colors":["#00FF00","#0000FF"],"labels":["no","yes"],"na_color":null,"na_label":"NA","opacity":1,"position":"topright","type":"factor","title":"top3","extra":null,"layerId":null,"className":"info legend","group":null}]},{"method":"addPolylines","args":[[[[{"lng":[-93.16661,-93.1712321,-93.27594,-93.27703,-93.28694,-93.16484,-93.1682,-93.19679,-93.16917,-93.27661],"lat":[44.94131,44.9378965,44.93988,44.95669,44.94922,44.94331,44.93368,44.94208,44.94048,44.9569]}]]],null,null,{"interactive":true,"className":"","stroke":true,"color":"#8B0000","weight":5,"opacity":0.5,"fill":false,"fillColor":"#8B0000","fillOpacity":0.2,"smoothFactor":1,"noClip":false},null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[44.93368,44.9569],"lng":[-93.28694,-93.16484]}},"evals":[],"jsHooks":[]}</script><!--/html_preserve-->
+<!--html_preserve--><div id="htmlwidget-f3b016ecb472cb321ada" style="width:672px;height:480px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-f3b016ecb472cb321ada">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addProviderTiles","args":["CartoDB.Voyager",null,null,{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addCircles","args":[[44.94131,44.9378965,44.93988,44.95669,44.94922,44.94331,44.93368,44.94208,44.94048,44.9569],[-93.16661,-93.1712321,-93.27594,-93.27703,-93.28694,-93.16484,-93.1682,-93.19679,-93.16917,-93.27661],10,null,null,{"interactive":true,"className":"","stroke":true,"color":["#00FF00","#00FF00","#0000FF","#0000FF","#00FF00","#00FF00","#0000FF","#00FF00","#00FF00","#00FF00"],"weight":5,"opacity":1,"fill":true,"fillColor":["#00FF00","#00FF00","#0000FF","#0000FF","#00FF00","#00FF00","#0000FF","#00FF00","#00FF00","#00FF00"],"fillOpacity":0.2},null,null,["Home","Macalester College","Hola Arepa","Vertical Endeavors","Moto-i","My friend's place","Simplicitea","River","Shish","IceHouse"],{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null,null]},{"method":"addLegend","args":[{"colors":["#00FF00","#0000FF"],"labels":["no","yes"],"na_color":null,"na_label":"NA","opacity":1,"position":"topright","type":"factor","title":"top3","extra":null,"layerId":null,"className":"info legend","group":null}]},{"method":"addPolylines","args":[[[[{"lng":[-93.16661,-93.1712321,-93.27594,-93.27703,-93.28694,-93.16484,-93.1682,-93.19679,-93.16917,-93.27661],"lat":[44.94131,44.9378965,44.93988,44.95669,44.94922,44.94331,44.93368,44.94208,44.94048,44.9569]}]]],null,null,{"interactive":true,"className":"","stroke":true,"color":"#8B0000","weight":5,"opacity":0.5,"fill":false,"fillColor":"#8B0000","fillOpacity":0.2,"smoothFactor":1,"noClip":false},null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[44.93368,44.9569],"lng":[-93.28694,-93.16484]}},"evals":[],"jsHooks":[]}</script><!--/html_preserve-->
 
   
 ## Revisiting old datasets
@@ -866,14 +866,14 @@ departures_casual <-
 ```
 
 ```r
-US <- get_stamenmap(
+WA <- get_stamenmap(
   bbox = c(left = -77.2201, bottom = 38.8006, right = -76.8459, top = 38.9692),
   maptype = "terrain",
   zoom = 12
 )
 
   
-ggmap(US)+
+ggmap(WA)+
   geom_point(data = departures_casual,
              aes(x = long,
                  y = lat,
@@ -883,7 +883,7 @@ ggmap(US)+
   theme_map()+
   theme(legend.background = element_blank())+
   labs(color = "Casual users' 
-       proportion")
+      proportion")
 ```
 
 ```
@@ -900,7 +900,89 @@ The following exercises will use the COVID-19 data from the NYT.
 
   11. Create a map that colors the states by the most recent cumulative number of COVID-19 cases (remember, these data report cumulative numbers so you don't need to compute that). Describe what you see. What is the problem with this map?
   
+
+```r
+covid19_latest <- 
+  covid19 %>% 
+    mutate(state_name = str_to_lower(state)) %>% 
+    group_by(state_name) %>% 
+    summarize(latest_case = max(cases))
+```
+
+```
+## `summarise()` ungrouping output (override with `.groups` argument)
+```
+
+```r
+covid19_latest
+```
+
+<div data-pagedtable="false">
+  <script data-pagedtable-source type="application/json">
+{"columns":[{"label":["state_name"],"name":[1],"type":["chr"],"align":["left"]},{"label":["latest_case"],"name":[2],"type":["dbl"],"align":["right"]}],"data":[{"1":"alabama","2":"481605"},{"1":"alaska","2":"56008"},{"1":"arizona","2":"798845"},{"1":"arkansas","2":"313348"},{"1":"california","2":"3489996"},{"1":"colorado","2":"416905"},{"1":"connecticut","2":"270242"},{"1":"delaware","2":"83239"},{"1":"district of columbia","2":"39001"},{"1":"florida","2":"1830980"},{"1":"georgia","2":"942484"},{"1":"guam","2":"8668"},{"1":"hawaii","2":"26803"},{"1":"idaho","2":"167566"},{"1":"illinois","2":"1166098"},{"1":"indiana","2":"652836"},{"1":"iowa","2":"329726"},{"1":"kansas","2":"290510"},{"1":"kentucky","2":"393775"},{"1":"louisiana","2":"420394"},{"1":"maine","2":"42677"},{"1":"maryland","2":"371885"},{"1":"massachusetts","2":"559350"},{"1":"michigan","2":"630248"},{"1":"minnesota","2":"474237"},{"1":"mississippi","2":"287980"},{"1":"missouri","2":"509031"},{"1":"montana","2":"97575"},{"1":"nebraska","2":"197761"},{"1":"nevada","2":"288777"},{"1":"new hampshire","2":"71017"},{"1":"new jersey","2":"747432"},{"1":"new mexico","2":"180761"},{"1":"new york","2":"1546665"},{"1":"north carolina","2":"828771"},{"1":"north dakota","2":"98673"},{"1":"northern mariana islands","2":"134"},{"1":"ohio","2":"941265"},{"1":"oklahoma","2":"414272"},{"1":"oregon","2":"150464"},{"1":"pennsylvania","2":"901245"},{"1":"puerto rico","2":"131452"},{"1":"rhode island","2":"121787"},{"1":"south carolina","2":"489018"},{"1":"south dakota","2":"110376"},{"1":"tennessee","2":"745150"},{"1":"texas","2":"2571789"},{"1":"utah","2":"361756"},{"1":"vermont","2":"13862"},{"1":"virgin islands","2":"2542"},{"1":"virginia","2":"551538"},{"1":"washington","2":"331305"},{"1":"west virginia","2":"127889"},{"1":"wisconsin","2":"607639"},{"1":"wyoming","2":"53136"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+
+```r
+states_map <- map_data("state")
+
+covid19_latest %>% 
+  ggplot() +
+  geom_map(map = states_map,
+           aes(map_id = state_name,
+               fill = latest_case)) +
+  expand_limits(x = states_map$long, y = states_map$lat) + 
+  labs(fill = "Cumulative count")+
+  theme_map()+
+  theme(legend.background = element_blank())
+```
+
+![](04_exercises_files/figure-html/unnamed-chunk-13-1.png)<!-- -->
+  
+  
   12. Now add the population of each state to the dataset and color the states by most recent cumulative cases/10,000 people. See the code for doing this with the Starbucks data. You will need to make some modifications. 
+  
+
+```r
+cases_population <- 
+  covid19 %>% 
+    mutate(state_name = str_to_lower(state)) %>% 
+    group_by(state_name) %>% 
+    summarize(latest_case = max(cases)) %>% 
+    left_join(census_pop_est_2018,
+            by = c("state_name" = "state")) %>% 
+    mutate(cases_per_10000 = (latest_case/est_pop_2018)*10000)
+```
+
+```
+## `summarise()` ungrouping output (override with `.groups` argument)
+```
+
+```r
+cases_population
+```
+
+<div data-pagedtable="false">
+  <script data-pagedtable-source type="application/json">
+{"columns":[{"label":["state_name"],"name":[1],"type":["chr"],"align":["left"]},{"label":["latest_case"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["est_pop_2018"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["cases_per_10000"],"name":[4],"type":["dbl"],"align":["right"]}],"data":[{"1":"alabama","2":"481605","3":"4887871","4":"985.3063"},{"1":"alaska","2":"56008","3":"737438","4":"759.4944"},{"1":"arizona","2":"798845","3":"7171646","4":"1113.8935"},{"1":"arkansas","2":"313348","3":"3013825","4":"1039.7020"},{"1":"california","2":"3489996","3":"39557045","4":"882.2691"},{"1":"colorado","2":"416905","3":"5695564","4":"731.9819"},{"1":"connecticut","2":"270242","3":"3572665","4":"756.4157"},{"1":"delaware","2":"83239","3":"967171","4":"860.6441"},{"1":"district of columbia","2":"39001","3":"702455","4":"555.2099"},{"1":"florida","2":"1830980","3":"21299325","4":"859.6423"},{"1":"georgia","2":"942484","3":"10519475","4":"895.9421"},{"1":"guam","2":"8668","3":"NA","4":"NA"},{"1":"hawaii","2":"26803","3":"1420491","4":"188.6883"},{"1":"idaho","2":"167566","3":"1754208","4":"955.2231"},{"1":"illinois","2":"1166098","3":"12741080","4":"915.2270"},{"1":"indiana","2":"652836","3":"6691878","4":"975.5647"},{"1":"iowa","2":"329726","3":"3156145","4":"1044.7112"},{"1":"kansas","2":"290510","3":"2911505","4":"997.8001"},{"1":"kentucky","2":"393775","3":"4468402","4":"881.2435"},{"1":"louisiana","2":"420394","3":"4659978","4":"902.1373"},{"1":"maine","2":"42677","3":"1338404","4":"318.8649"},{"1":"maryland","2":"371885","3":"6042718","4":"615.4267"},{"1":"massachusetts","2":"559350","3":"6902149","4":"810.3998"},{"1":"michigan","2":"630248","3":"9995915","4":"630.5056"},{"1":"minnesota","2":"474237","3":"5611179","4":"845.1646"},{"1":"mississippi","2":"287980","3":"2986530","4":"964.2629"},{"1":"missouri","2":"509031","3":"6126452","4":"830.8741"},{"1":"montana","2":"97575","3":"1062305","4":"918.5215"},{"1":"nebraska","2":"197761","3":"1929268","4":"1025.0572"},{"1":"nevada","2":"288777","3":"3034392","4":"951.6799"},{"1":"new hampshire","2":"71017","3":"1356458","4":"523.5474"},{"1":"new jersey","2":"747432","3":"8908520","4":"839.0081"},{"1":"new mexico","2":"180761","3":"2095428","4":"862.6448"},{"1":"new york","2":"1546665","3":"19542209","4":"791.4484"},{"1":"north carolina","2":"828771","3":"10383620","4":"798.1523"},{"1":"north dakota","2":"98673","3":"760077","4":"1298.1974"},{"1":"northern mariana islands","2":"134","3":"NA","4":"NA"},{"1":"ohio","2":"941265","3":"11689442","4":"805.2266"},{"1":"oklahoma","2":"414272","3":"3943079","4":"1050.6307"},{"1":"oregon","2":"150464","3":"4190713","4":"359.0415"},{"1":"pennsylvania","2":"901245","3":"12807060","4":"703.7095"},{"1":"puerto rico","2":"131452","3":"NA","4":"NA"},{"1":"rhode island","2":"121787","3":"1057315","4":"1151.8516"},{"1":"south carolina","2":"489018","3":"5084127","4":"961.8524"},{"1":"south dakota","2":"110376","3":"882235","4":"1251.0952"},{"1":"tennessee","2":"745150","3":"6770010","4":"1100.6631"},{"1":"texas","2":"2571789","3":"28701845","4":"896.0361"},{"1":"utah","2":"361756","3":"3161105","4":"1144.3973"},{"1":"vermont","2":"13862","3":"626299","4":"221.3320"},{"1":"virgin islands","2":"2542","3":"NA","4":"NA"},{"1":"virginia","2":"551538","3":"8517685","4":"647.5210"},{"1":"washington","2":"331305","3":"7535591","4":"439.6536"},{"1":"west virginia","2":"127889","3":"1805832","4":"708.1999"},{"1":"wisconsin","2":"607639","3":"5813568","4":"1045.2084"},{"1":"wyoming","2":"53136","3":"577737","4":"919.7264"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+
+```r
+states_map <- map_data("state")
+
+cases_population %>% 
+  ggplot() +
+  geom_map(map = states_map,
+           aes(map_id = state_name,
+               fill = cases_per_10000)) +
+  expand_limits(x = states_map$long, y = states_map$lat) + 
+  labs(fill = "Cases/10000")+
+  theme_map()+
+  theme(legend.background = element_blank())
+```
+
+![](04_exercises_files/figure-html/unnamed-chunk-14-1.png)<!-- -->
   
   13. **CHALLENGE** Choose 4 dates spread over the time period of the data and create the same map as in exercise 12 for each of the dates. Display the four graphs together using faceting. What do you notice?
   
