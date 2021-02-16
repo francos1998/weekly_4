@@ -339,6 +339,31 @@ Stations<-read_csv("http://www.macalester.edu/~dshuman1/data/112/DC-Stations.csv
   9. Use the latitude and longitude variables in `Stations` to make a visualization of the total number of departures from each station in the `Trips` data. Use either color or size to show the variation in number of departures. This time, plot the points on top of a map. Use any of the mapping tools you'd like.
   
 ```{r}
+departures_station <- 
+  Trips %>% 
+  left_join(Stations, by = c("sstation" = "name")) %>% 
+  group_by(lat, long) %>% 
+  summarize(freq_stations = n())
+
+departures_station
+
+US <- get_stamenmap(
+  bbox = c(left = -77.2201, bottom = 38.8006, right = -76.8459, top = 38.9692),
+  maptype = "terrain",
+  zoom = 12
+)
+
+  
+ggmap(US)+
+  geom_point(data = departures_station,
+             aes(x = long,
+                 y = lat,
+                 color = freq_stations),
+             alpha = .8,
+             size = 2)+
+  theme_map()+
+  theme(legend.background = element_blank())+
+  labs(color = "Rides per Station")
 
 ```
   
