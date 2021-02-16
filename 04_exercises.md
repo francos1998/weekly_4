@@ -510,7 +510,7 @@ ggmap(twins)+
            size = 4)+
   annotate(geom = "text",
            x = -93.17216,
-           y = 44.88,
+           y = 44.899,
            xmin = -93.17216,
            xmax = -93.16924,
            ymin = 44.93976,
@@ -610,6 +610,74 @@ starbucks_with_2018_pop_est %>%
   * Connect all your locations together with a line in a meaningful way (you may need to order them differently in the original data).  
   
   * If there are other variables you want to add that could enhance your plot, do that now.  
+  
+
+```r
+favorite_stp_by_franco <- tibble(
+  place = c("Home",
+            "Macalester College",
+            "Hola Arepa", 
+            "Vertical Endeavors",
+            "IceHouse",
+            "Simplicitea",
+            "My friend's place",
+            "Shish",
+            "River",
+            "Moto-i"),
+  long = c(-93.16661, 
+           -93.1712321, 
+           -93.27594, 
+           -93.27703, 
+           -93.27661, 
+           -93.16820, 
+           -93.16484, 
+           -93.16917, 
+           -93.19679,
+           -93.28694),
+  lat = c(44.94131, 
+          44.9378965, 
+          44.93988,
+          44.95669,
+          44.95690, 
+          44.93368, 
+          44.94331, 
+          44.94048, 
+          44.94208,
+          44.94922),
+  top3 = c("no","no","yes","yes","no","no","yes","no","no","no")
+  )
+```
+
+
+```r
+pal <- colorFactor(c("green","blue"), 
+                     domain = favorite_stp_by_franco$top3)
+pal(favorite_stp_by_franco$top3)
+```
+
+```
+##  [1] "#00FF00" "#00FF00" "#0000FF" "#0000FF" "#00FF00" "#00FF00" "#0000FF"
+##  [8] "#00FF00" "#00FF00" "#00FF00"
+```
+
+```r
+leaflet(data = favorite_stp_by_franco) %>% #base plot
+  addProviderTiles(providers$CartoDB.Voyager) %>% 
+  addCircles(color = ~pal(top3),
+             opacity = 1) %>% 
+  addLegend(position = "topright",
+            pal = pal,
+            opacity = 1,
+            values = ~top3)
+```
+
+```
+## Assuming "long" and "lat" are longitude and latitude, respectively
+```
+
+<!--html_preserve--><div id="htmlwidget-441ea745b1e10b484a89" style="width:672px;height:480px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-441ea745b1e10b484a89">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addProviderTiles","args":["CartoDB.Voyager",null,null,{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addCircles","args":[[44.94131,44.9378965,44.93988,44.95669,44.9569,44.93368,44.94331,44.94048,44.94208,44.94922],[-93.16661,-93.1712321,-93.27594,-93.27703,-93.27661,-93.1682,-93.16484,-93.16917,-93.19679,-93.28694],10,null,null,{"interactive":true,"className":"","stroke":true,"color":["#00FF00","#00FF00","#0000FF","#0000FF","#00FF00","#00FF00","#0000FF","#00FF00","#00FF00","#00FF00"],"weight":5,"opacity":1,"fill":true,"fillColor":["#00FF00","#00FF00","#0000FF","#0000FF","#00FF00","#00FF00","#0000FF","#00FF00","#00FF00","#00FF00"],"fillOpacity":0.2},null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null,null]},{"method":"addLegend","args":[{"colors":["#00FF00","#0000FF"],"labels":["no","yes"],"na_color":null,"na_label":"NA","opacity":1,"position":"topright","type":"factor","title":"top3","extra":null,"layerId":null,"className":"info legend","group":null}]}],"limits":{"lat":[44.93368,44.9569],"lng":[-93.28694,-93.16484]}},"evals":[],"jsHooks":[]}</script><!--/html_preserve-->
+
   
 ## Revisiting old datasets
 
