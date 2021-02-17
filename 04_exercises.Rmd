@@ -12,7 +12,7 @@ output:
 
 
 ```{r setup, include=FALSE}
-#knitr::opts_chunk$set(echo = TRUE, error=TRUE, message=FALSE, warning=FALSE)
+knitr::opts_chunk$set(echo = TRUE, error=TRUE, message=FALSE, warning=FALSE)
 ```
 
 ```{r libraries}
@@ -466,12 +466,10 @@ These exercises use the datasets `MplsStops` and `MplsDemo` from the `carData` l
 ```{r}
 mpls_suspicious <- 
   MplsStops %>% 
-    mutate(sus = ifelse(problem == "suspicious", 1,0)) %>% 
+    #mutate(sus = ifelse(problem == "suspicious", 1,0)) %>% 
     group_by(neighborhood) %>% 
-    summarize(prop_suspicious = mean(sus),
-              freq_stops = n(),
-              long,
-              lat) %>% 
+    summarize(prop_suspicious = mean(problem == "suspicious"),
+              freq_stops = n()) %>% 
     arrange(desc(freq_stops))
 mpls_suspicious
 ```
@@ -498,14 +496,59 @@ leaflet(data = MplsStops) %>% #base plot
 
   16. Save the folder from moodle called Minneapolis_Neighborhoods into your project/repository folder for this assignment. Make sure the folder is called Minneapolis_Neighborhoods. Use the code below to read in the data and make sure to **delete the `eval=FALSE`**. Although it looks like it only links to the .sph file, you need the entire folder of files to create the `mpls_nbhd` data set. These data contain information about the geometries of the Minneapolis neighborhoods. Using the `mpls_nbhd` dataset as the base file, join the `mpls_suspicious` and `MplsDemo` datasets to it by neighborhood (careful, they are named different things in the different files). Call this new dataset `mpls_all`.
 
-```{r, eval=FALSE}
+```{r}
 mpls_nbhd <- st_read("Minneapolis_Neighborhoods/Minneapolis_Neighborhoods.shp", quiet = TRUE)
+
+MplsDemo
 ```
+
+```{r}
+mpls_all <- 
+mpls_nbhd %>% 
+  left_join(MplsDemo, 
+            by = c("BDNAME"="neighborhood")) %>% 
+  left_join(mpls_suspicious,
+            by = c("BDNAME"="neighborhood"))
+mpls_all
+```
+
+
+
 
   17. Use `leaflet` to create a map from the `mpls_all` data  that colors the neighborhoods by `prop_suspicious`. Display the neighborhood name as you scroll over it. Describe what you observe in the map.
   
+```{r}
+pal <- colorFactor("viridis", 
+                     domain = mpls_all$prop_suspicious)
+
+mpls_all %>% 
+  leaflet() %>% 
+    addProviderTiles(providers$CartoDB.Voyager) %>% 
+    addPolygons(label = ~paste(BDNAME),
+                color = ~pal(prop_suspicious),
+                opacity = 1) 
+
+```
+
+
+
   18. Use `leaflet` to create a map of your own choosing. Come up with a question you want to try to answer and use the map to help answer that question. Describe what your map shows. 
   
+>My question is: What is the spatial income distribution across neighborhoods?
+
+```{r}
+pal <- colorFactor("viridis", 
+                     domain = mpls_all$hhIncome)
+
+mpls_all %>% 
+  leaflet() %>% 
+    addProviderTiles(providers$CartoDB.Voyager) %>% 
+    addPolygons(label = ~paste(BDNAME,",",hhIncome,"$"),
+                color = ~pal(hhIncome),
+                opacity = 1) 
+```
+
+>My map shows the income per household spatial distribution, we can observe that wealthier areas are further from the center of the city, being Northloop the wealthiest neighborhood that is closest to the middle of the city. Also, there seem to be wealthier neighborhoods at the Southern part of Minneapolis than at the north.  
   
 ## GitHub link
 
